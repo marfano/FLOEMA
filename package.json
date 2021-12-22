@@ -1,0 +1,20 @@
+{
+  "name": "floema",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "webpack -p --progress --config webpack.config.build.js",
+    "development": "webpack serve --progress --config webpack.config.development.js",
+    "start": "npm run development"
+  },
+  "author": "Martina Ramirez",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^10.2.0",
+    "mini-css-extract-plugin": "^2.4.5",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.0",
+    "webpack-merge": "^5.8.0"
+  }
+}

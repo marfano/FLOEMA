@@ -19,6 +19,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(methodOverride())
 app.use(errorHandler())
+app.use(express.static(path.join(__dirname, 'public')))
 
 const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
@@ -33,8 +34,6 @@ const initApi = (req) => {
 
 // Link Resolver
 const HandleLinkResolver = (doc) => {
-  console.log(doc)
-
   if (doc.type === 'product') {
     return `/detail/${doc.slug}`
   }
@@ -56,7 +55,7 @@ app.use((req, res, next) => {
 
   res.locals.PrismicDOM = PrismicDOM
   res.locals.Numbers = (index) => {
-    return index == 0 ? 'One' : index == 1 ? 'Two' : index == 2 ? 'Three' : index == 3 ? 'Four' : ''
+    return index === 0 ? 'One' : index === 1 ? 'Two' : index === 2 ? 'Three' : index === 3 ? 'Four' : ''
   }
 
   next()

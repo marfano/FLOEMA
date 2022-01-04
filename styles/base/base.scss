@@ -1,0 +1,9 @@
+body {
+  @extend %description-16;
+
+  font-family: $font-suisse-bp;
+
+  @include media('<=phone') {
+    font-size: 100px;
+  }
+}

@@ -129,8 +129,6 @@ app.get('/collections', async (req, res) => {
       {fetchLinks: 'product.image'}
   )
 
-  console.log(defaults)
-
   res.render('pages/collections', {
     ...defaults,
     collections,

@@ -1,6 +1,6 @@
 meta(charset='utf-8')
 block title
-  title Floema
+  title=meta.data.title
 meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=3.0')
 
 <!-- Search Engine -->
@@ -29,6 +29,6 @@ meta(name="og:description" content=meta.data.description)
 meta(name="og:image" content=meta.data.image ? meta.data.image.url : '')
 meta(name="og:type" content="website")
 
-link(rel="stylesheet" href="main.css")
+link(rel="stylesheet" href="/main.css")
 
 base(herf='/')

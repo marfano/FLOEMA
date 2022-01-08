@@ -1,14 +1,14 @@
 extends ../base.pug
 
 block variables
-  - var template = 'collection'
+  - var template = 'collections'
 
 block content
   .collections
     .collections__wrapper
       .collections_titles
         each collection, index in collections
-          .collections__titles__label!=`${home.data.collection}<br> ${Numbers(index)}`
+          .collections__titles__label!=`${home.data.collection}<br>${Numbers(index)}`
           .collections__titles__title=collection.data.title
 
       .collections__gallery
@@ -28,5 +28,5 @@ block content
       .collections__mobile
         each collection, index in collections
           .collections__mobile__item
-            .collections__mobile__item__label!=`${home.data.collection}<br> ${Numbers(index)}`
+            .collections__mobile__item__label!=`${home.data.collection}<br>${Numbers(index)}`
             .collections__mobile__item__title=collection.data.title

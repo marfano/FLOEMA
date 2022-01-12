@@ -39,6 +39,7 @@
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss-loader": "^6.2.1",
+    "prefix": "^1.0.0",
     "raw-loader": "^4.0.2",
     "require": "^2.4.20",
     "sass": "^1.45.1",

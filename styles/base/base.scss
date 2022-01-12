@@ -5,17 +5,24 @@
 }
 
 html {
-  font-size: calc(100vw / 1920 * 10);
+  @extend %cover;
+  $vw: 100vw;
+
+  font-size: calc($vw / 1920 * 10);
   line-height: 1;
+  position: fixed;
+  overflow: hidden;
 
   @include media('<phone') {
-    font-size: calc(100vw / 750 * 10);;
+    font-size: calc($vw / 750 * 10);;
   }
 }
 
 body {
+  @extend %cover;
   @extend %description-16;
 
+  position: fixed;
   font-family: $font-suisse-bp;
 }
 
@@ -35,4 +42,8 @@ button {
 
 img {
   vertical-align: middle;
+}
+
+.content {
+  @extend %cover;
 }

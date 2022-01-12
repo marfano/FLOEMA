@@ -8,7 +8,7 @@ _Hey! This is a boilerplate which inspired from Luis Henrique Bizarro course on 
 
 ## Build with 🛠️
 
-* [JavaScript](https://www.javascript.com/)- Yeah, [without frameworks](https://fagnerbrack.com/exactly-you-dont-need-a-javascript-framework-86022c093dd5). A challenge, but more freedom.
+* [JavaScript](https://www.javascript.com/)- Yeah, [without frameworks](https://fagnerbrack.com/exactly-you-dont-need-a-javascript-framework-86022c093dd5). A challenge, but freest.
 * [HTML+CSS](https://www.w3schools.com/html/html_css.asp) - For the basic structure. Everytime.
 * [SCSS](https://sass-lang.com/) - Sassy Cascading Style Sheets, to define complex operations on SassScript values
 * [Pug](https://pugjs.org/api/getting-started.html) - A HTML templating engine

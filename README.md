@@ -23,4 +23,4 @@ _Inspired from Luis Henrique Bizarro course on Awwwards_
 * **Martina Ramirez** - *This work* - [marfano](https://github.com/marfano)
 * **Luis Henrique Bizarro** - *Standard work* - [ihbizarro](https://github.com/lhbizarro)
 
-⌨️ con ❤️ por [marfano](https://github.com/marfano)
+⌨️ with ❤️ by [marfano](https://github.com/marfano)

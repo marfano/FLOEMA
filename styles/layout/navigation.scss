@@ -15,6 +15,11 @@
   top: 4rem;
   position: absolute;
   pointer-events: auto;
+  transition: opacity 0.4s ease;
+
+  &:hover {
+    opacity: 0.5;
+  }
 
   @include media('<phone') {
     height: 4.3rem;
@@ -40,8 +45,10 @@
 }
 
 .navigation__list__link {
+  @extend %link--hidden;
   @extend %title-20;
 
   display: block;
+  line-height: 1;
 }
 

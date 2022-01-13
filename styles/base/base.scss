@@ -14,7 +14,7 @@ html {
   overflow: hidden;
 
   @include media('<phone') {
-    font-size: calc($vw / 750 * 10);;
+    font-size: calc($vw / 750 * 10);
   }
 }
 
@@ -22,6 +22,8 @@ body {
   @extend %cover;
   @extend %description-16;
 
+  background: $color-contessa;
+  color: $color-quarter-spanish-white;
   position: fixed;
   font-family: $font-suisse-bp;
 }
@@ -41,9 +43,25 @@ button {
 }
 
 img {
+  opacity: 0;
+  trasition: opacity 0.4s ease;
   vertical-align: middle;
+
+  &.loaded {
+    opacity: 1;
+  }
 }
 
 .content {
   @extend %cover;
+}
+
+[data-animation="label"],
+[data-animation="paragraph"],
+[data-animation="title"] {
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
 }

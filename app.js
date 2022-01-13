@@ -1,7 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable semi */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 require('dotenv').config()
 
 const logger = require('morgan')
@@ -9,6 +5,7 @@ const express = require('express')
 const errorHandler = require('errorhandler')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
+const UAParser = require('ua-parser-js')
 
 const app = express()
 const path = require('path')
@@ -51,8 +48,13 @@ const HandleLinkResolver = (doc) => {
 
 // Middleware to inject prismic context
 app.use((req, res, next) => {
-  res.locals.Link = HandleLinkResolver
+  const ua = UAParser(req.headers['user-agent'])
 
+  res.locals.isDesktop = ua.device.type === undefined
+  res.locals.isPhone = ua.device.type === 'mobile'
+  res.locals.isTablet = ua.device.type === 'tablet'
+
+  res.locals.Link = HandleLinkResolver
   res.locals.PrismicDOM = PrismicDOM
   res.locals.Numbers = (index) => {
     return index === 0 ? 'One' : index === 1 ? 'Two' : index === 2 ? 'Three' : index === 3 ? 'Four' : ''

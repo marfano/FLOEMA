@@ -1,7 +1,6 @@
 import each from 'lodash/each'
 
 import Canvas from 'components/Canvas'
-
 import Detection from 'classes/Detection'
 
 import Navigation from 'components/Navigation'
@@ -38,7 +37,7 @@ class App {
     this.preloader.once('completed', this.onPreloaded.bind(this))
   }
 
-  createCanvas () {
+  createCanvas() {
     this.canvas = new Canvas()
   }
 
@@ -119,19 +118,39 @@ class App {
     if (this.canvas && this.canvas.onResize) {
       this.canvas.onResize()
     }
+
     if (this.page && this.page.onResize) {
       this.page.onResize()
     }
   }
 
+  onTouchDown(e) {
+    if (this.canvas && this.canvas.onTouchDown) {
+      this.canvas.onTouchDown(e)
+    }
+  }
+
+  onTouchMove(e) {
+    if (this.canvas && this.canvas.onTouchMove) {
+      this.canvas.onTouchMove(e)
+    }
+  }
+
+  onTouchUp(e) {
+    if (this.canvas && this.canvas.onTouchUp) {
+      this.canvas.onTouchUp(e)
+    }
+  }
+
   /*
-   *  Loop
+   *  LOop
    */
 
   update() {
     if (this.canvas && this.canvas.update) {
       this.canvas.update()
     }
+
     if (this.page && this.page.update) {
       this.page.update()
     }
@@ -144,7 +163,14 @@ class App {
    */
 
   addEventListeners() {
-    window.addEventListener('popstate', this.onPopState.bind(this))
+    window.addEventListener('mousedown', this.onTouchDown.bind(this))
+    window.addEventListener('mousemove', this.onTouchMove.bind(this))
+    window.addEventListener('mouseup', this.onTouchUp.bind(this))
+
+    window.addEventListener('touchstart', this.onTouchDown.bind(this))
+    window.addEventListener('touchmove', this.onTouchMove.bind(this))
+    window.addEventListener('touchend', this.onTouchUp.bind(this))
+
     window.addEventListener('resize', this.onResize.bind(this))
   }
 

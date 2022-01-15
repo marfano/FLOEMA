@@ -1,50 +1,49 @@
 *,
-*:after,
-*:before {
+*::after,
+*::before {
   box-sizing: border-box;
+  user-select: none
 }
 
 html {
   @extend %cover;
   $vw: 100vw;
-
-  font-size: calc($vw / 1920 * 10);
-  line-height: 1;
+  font-size: calc($vw / 1920px * 10px);
   position: fixed;
+  line-height: 1;
   overflow: hidden;
+  background: $color-contessa;
+  color: $color-quarter-spanish-white;
 
   @include media('<phone') {
-    font-size: calc($vw / 750 * 10);
+    font-size: calc($vw / 750px * 10px);
   }
 }
 
 body {
   @extend %cover;
-  @extend %description-16;
-
-  background: $color-contessa;
-  color: $color-quarter-spanish-white;
-  position: fixed;
   font-family: $font-suisse-bp;
+  @extend %description-16;
+  position: fixed;
 }
 
 a {
   color: inherit;
-  outline: none;
   text-decoration: none;
+  outline: none;
 }
 
 button {
+  border: none;
   background: none;
   color: inherit;
-  border: none;
-  outline: none;
   cursor: pointer;
+  outline: none;
 }
 
 img {
   opacity: 0;
-  trasition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
   vertical-align: middle;
 
   &.loaded {
@@ -56,9 +55,9 @@ img {
   @extend %cover;
 }
 
-[data-animation="label"],
-[data-animation="paragraph"],
-[data-animation="title"] {
+[data-animation='paragraph'],
+[data-animation='label'],
+[data-animation='title'] {
   span {
     display: inline-block;
     overflow: hidden;

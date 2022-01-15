@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Camera, Renderer, Transform } from 'ogl'
 
 import About from './About'
@@ -207,9 +208,9 @@ export default class Canvas {
 
   // Loop.
 
-  update() {
+  update(scroll) {
     if (this.about) {
-      this.about.update()
+      this.about.update(scroll)
     }
 
     if (this.home) {

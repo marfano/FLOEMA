@@ -22,7 +22,7 @@ block content
               .about__content__box
                 p.about__content__label(data-animation="label")!=section.primary.label
 
-                .about__content__description(data-animation="paragraph")!=PrismicDOM.RichText.asHtml(section.primary.description).replace(/<p>/g, '<p data-animation="paragraph">')
+                .about__content__description!=PrismicDOM.RichText.asHtml(section.primary.description).replace(/<p>/g, '<p data-animation="paragraph">')
 
               figure.about__content__media
                 img.about__content__media__image(alt=section.primary.image.alt data-src=section.primary.image.url)

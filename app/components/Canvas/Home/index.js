@@ -9,17 +9,13 @@ import Media from './Media'
 export default class {
   constructor({ gl, scene, sizes }) {
     this.gl = gl
+    this.scene = scene
     this.sizes = sizes
 
     this.group = new Transform()
 
     this.galleryElement = document.querySelector('.home__gallery')
-    this.mediasElements = document.querySelectorAll( '.home__gallery__media__image' )
-
-    this.createGeometry()
-    this.createGallery()
-
-    this.group.setParent(scene)
+    this.mediasElements = document.querySelectorAll( '.home__gallery__media__image' ) // prettier-ignore
 
     this.x = {
       current: 0,
@@ -42,6 +38,13 @@ export default class {
       x: 0,
       y: 0,
     }
+
+    this.createGeometry()
+    this.createGallery()
+
+    this.group.setParent(this.scene)
+
+    this.show()
   }
 
   createGeometry() {
@@ -61,6 +64,15 @@ export default class {
     })
   }
 
+  // Animations
+  show() {
+    map(this.medias, (media) => media.show())
+  }
+
+  hide() {
+    map(this.medias, (media) => media.hide())
+  }
+
   // Events
 
   onResize(e) {
@@ -70,7 +82,7 @@ export default class {
 
     this.gallerySizes = {
       width: (this.galleryBounds.width / window.innerWidth) * this.sizes.width,
-      height: (this.galleryBounds.height / window.innerHeight) * this.sizes.height,
+      height: (this.galleryBounds.height / window.innerHeight) * this.sizes.height, // prettier-ignore
     }
 
     this.scroll.x = this.x.target = 0
@@ -104,8 +116,8 @@ export default class {
   update() {
     if (!this.galleryBounds) return
 
-    this.x.current = GSAP.utils.interpolate( this.x.current, this.x.target, this.x.lerp )
-    this.y.current = GSAP.utils.interpolate( this.y.current, this.y.target, this.y.lerp )
+    this.x.current = GSAP.utils.interpolate( this.x.current, this.x.target, this.x.lerp ) // prettier-ignore
+    this.y.current = GSAP.utils.interpolate( this.y.current, this.y.target, this.y.lerp ) // prettier-ignore
 
     if (this.scroll.x < this.x.current) {
       this.x.direction = 'right'
@@ -130,7 +142,7 @@ export default class {
         if (x < -this.sizes.width / 2) {
           media.extra.x += this.gallerySizes.width
 
-          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
+          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03) // prettier-ignore
         }
       } else if (this.x.direction === 'right') {
         const x = media.mesh.position.x - scaleX
@@ -138,7 +150,7 @@ export default class {
         if (x > this.sizes.width / 2) {
           media.extra.x -= this.gallerySizes.width
 
-          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
+          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03) // prettier-ignore
         }
       }
 
@@ -150,7 +162,7 @@ export default class {
         if (y < -this.sizes.height / 2) {
           media.extra.y += this.gallerySizes.height
 
-          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
+          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03) // prettier-ignore
         }
       } else if (this.y.direction === 'bottom') {
         const y = media.mesh.position.y - scaleY
@@ -158,11 +170,16 @@ export default class {
         if (y > this.sizes.height / 2) {
           media.extra.y -= this.gallerySizes.height
 
-          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
+          media.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03) // prettier-ignore
         }
       }
 
       media.update(this.scroll)
     })
+  }
+
+  // Destroy
+  destroy() {
+    this.scene.removeChild(this.group)
   }
 }

@@ -1,31 +1,32 @@
 require('dotenv').config()
 
 const logger = require('morgan')
+const path = require('path')
 const express = require('express')
 const errorHandler = require('errorhandler')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
-const UAParser = require('ua-parser-js')
 
 const app = express()
-const path = require('path')
 const port = 8004
-
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(methodOverride())
-app.use(errorHandler())
-app.use(express.static(path.join(__dirname, 'public')))
 
 const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
+const { application } = require('express')
+const UAParser = require('ua-parser-js')
+
+app.use(logger('dev'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(errorHandler())
+app.use(methodOverride())
+app.use(express.static(path.join(__dirname, 'public')))
 
 // Initialize the prismic.io api
 const initApi = (req) => {
   return Prismic.client(process.env.PRISMIC_ENDPOINT, {
     accessToken: process.env.PRISMIC_ACCESS_TOKEN,
-    req
+    req,
   })
 }
 
@@ -40,9 +41,10 @@ const HandleLinkResolver = (doc) => {
   }
 
   if (doc.type === 'about') {
-    return '/about'
+    return `/about`
   }
 
+  // Default to homepage
   return '/'
 }
 
@@ -57,7 +59,15 @@ app.use((req, res, next) => {
   res.locals.Link = HandleLinkResolver
   res.locals.PrismicDOM = PrismicDOM
   res.locals.Numbers = (index) => {
-    return index === 0 ? 'One' : index === 1 ? 'Two' : index === 2 ? 'Three' : index === 3 ? 'Four' : ''
+    return index === 0
+      ? 'One'
+      : index === 1
+      ? 'Two'
+      : index === 2
+      ? 'Three'
+      : index === 3
+      ? 'Four'
+      : ''
   }
 
   next()
@@ -69,72 +79,96 @@ app.locals.basedir = app.get('views')
 
 const handleRequest = async (api) => {
   const meta = await api.getSingle('meta')
-  const navigation = await api.getSingle('navigation')
   const preloader = await api.getSingle('preloader')
+  const navigation = await api.getSingle('navigation')
 
   return {
     meta,
     navigation,
-    preloader
+    preloader,
   }
 }
 
 app.get('/', async (req, res) => {
   const api = await initApi(req)
   const defaults = await handleRequest(api)
+
   const home = await api.getSingle('home')
 
-  const {results: collections} = await api.query(
-      Prismic.Predicates.at('document.type', 'collection'),
-      {fetchLinks: 'product.image'}
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at('document.type', 'collection'),
+    { fetchLinks: 'product.image' }
   )
+
+  console.log(defaults.navigation)
 
   res.render('pages/home', {
     ...defaults,
+    home,
     collections,
-    home
   })
 })
 
 app.get('/about', async (req, res) => {
   const api = await initApi(req)
   const defaults = await handleRequest(api)
+
   const about = await api.getSingle('about')
 
   res.render('pages/about', {
     ...defaults,
-    about
-  })
-})
-
-app.get('/detail/:uid', async (req, res) => {
-  const api = await initApi(req)
-  const defaults = await handleRequest(api)
-
-  const product = await api.getByUID('product', req.params.uid, {
-    fetchLinks: 'collection.title'
-  })
-
-  res.render('pages/detail', {
-    ...defaults,
-    product
+    about,
   })
 })
 
 app.get('/collections', async (req, res) => {
   const api = await initApi(req)
   const defaults = await handleRequest(api)
-  const home = await api.getSingle('home')
 
-  const {results: collections} = await api.query(
-      Prismic.Predicates.at('document.type', 'collection'),
-      {fetchLinks: 'product.image'}
+  const home = await api.getSingle('home')
+  const { results: collections } = await api.query(
+    Prismic.Predicates.at('document.type', 'collection'),
+    { fetchLinks: 'product.image' }
   )
 
   res.render('pages/collections', {
     ...defaults,
     collections,
-    home
+    home,
+  })
+})
+
+// app.get('/detail/:uid', async (req, res) => {
+//   const api = await initApi(req)
+//   const defaults = await handleRequest(api)
+
+//   const product = await api.getByUID('product', req.params.uid, {
+//     fetchLinks: 'collection.title',
+//   })
+
+//   if (product) {
+//     res.render('pages/detail', {
+//       product,
+//       ...defaults,
+//     })
+//   } else {
+//     res.status(404).send('Page not found')
+//   }
+// })
+
+app.get('/detail/:uid', async (req, res) => {
+  const api = await initApi(req)
+  const defaults = await handleRequest(api)
+  const home = await api.getSingle('home')
+
+  const product = await api.getByUID('product', req.params.uid, {
+    fetchLinks: 'collection.title',
+  })
+
+  res.render('pages/detail', {
+    ...defaults,
+    home,
+    product,
   })
 })
 

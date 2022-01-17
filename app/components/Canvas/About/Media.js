@@ -1,4 +1,4 @@
-import { Mesh, Program, Texture } from 'ogl'
+import { Mesh, Program } from 'ogl'
 import GSAP from 'gsap'
 
 import Detection from 'classes/Detection'
@@ -26,14 +26,9 @@ export default class Media {
   }
 
   createTexture() {
-    this.texture = new Texture(this.gl)
-
     const image = this.element.querySelector('img')
 
-    this.image = new window.Image()
-    this.image.crossOrigin = 'anonymous'
-    this.image.src = image.getAttribute('data-src')
-    this.image.onload = (_) => (this.texture.image = this.image)
+    this.texture = window.TEXTURES[image.getAttribute('data-src')]
   }
 
   createProgram() {
@@ -86,6 +81,7 @@ export default class Media {
   }
 
   // Events
+
   onResize(sizes, scroll) {
     this.extra = 0
 
@@ -143,10 +139,3 @@ export default class Media {
     this.updateY(0)
   }
 }
-
-// import Detection from 'classes/Detection'
-
-// // updateY
-// const extra = Detection.isPhone() ? 20 : 40
-
-// console.log(extra)

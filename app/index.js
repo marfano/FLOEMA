@@ -97,6 +97,10 @@ class App {
       const html = await res.text()
       const div = document.createElement('div')
 
+      if (push) {
+        window.history.pushState({}, '', url)
+      }
+
       div.innerHTML = html
 
       const divContent = div.querySelector('.content')

@@ -85,8 +85,6 @@ const handleRequest = async (api) => {
   const about = await api.getSingle('about')
   const { results: collections } = await api.query( Prismic.Predicates.at('document.type', 'collection'), { fetchLinks: 'product.image' } ) // prettier-ignore
 
-  console.log(about, home, collections)
-
   const assets = []
 
   home.data.gallery.forEach((item) => {
@@ -110,8 +108,6 @@ const handleRequest = async (api) => {
       assets.push(item.products_product.data.image.url)
     })
   })
-
-  console.log(assets)
 
   return {
     assets,

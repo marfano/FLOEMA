@@ -101,7 +101,8 @@ export default class Canvas {
     this.collections = null
   }
 
-  //  Detail
+  //   Detail
+
   createDetail() {
     this.detail = new Detail({
       gl: this.gl,
@@ -130,6 +131,10 @@ export default class Canvas {
 
     if (this.collections) {
       this.collections.hide()
+    }
+
+    if (this.detail) {
+      this.detail.hide()
     }
 
     if (this.about) {
@@ -203,12 +208,12 @@ export default class Canvas {
       this.about.onResize(values)
     }
 
-    if (this.detail) {
-      this.detail.onResize(values)
-    }
-
     if (this.collections) {
       this.collections.onResize(values)
+    }
+
+    if (this.detail) {
+      this.detail.onResize(values)
     }
 
     if (this.home) {

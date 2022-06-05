@@ -1,6 +1,6 @@
 # FLOEMA
 
-_Hey! This is a boilerplate which inspired from Luis Henrique Bizarro course on Awwwards but intent to use latest and v5 techniques of Webpack._
+_Hey! This is a boilerplate which inspired from Luis Henrique Bizarro course in Awwwards, but trying to use latest and v5 techniques of Webpack._
 
 ## The idea 🚀
 
@@ -9,12 +9,12 @@ _Hey! This is a boilerplate which inspired from Luis Henrique Bizarro course on 
 ## Build with 🛠️
 
 * [JavaScript](https://www.javascript.com/)- Yeah, [without frameworks](https://fagnerbrack.com/exactly-you-dont-need-a-javascript-framework-86022c093dd5). A challenge, but freest.
-* [HTML+CSS](https://www.w3schools.com/html/html_css.asp) - For the basic structure. Everytime.
+* [HTML+CSS](https://www.w3schools.com/html/html_css.asp) - To basic structure. Yeah, the everywhere-stuff
 * [SCSS](https://sass-lang.com/) - Sassy Cascading Style Sheets, to define complex operations on SassScript values
 * [Pug](https://pugjs.org/api/getting-started.html) - A HTML templating engine
 * [GSAP](https://greensock.com/gsap/) - A suite of tools for scripted animation
 * [Prismic.io](https://prismic.io/) - A Content Management System (CMS)
-* [Webpack](https://webpack.js.org/) - A module bundler.
+* [Webpack](https://webpack.js.org/) - A module bundler
 
 ## Authors ✒️
 
